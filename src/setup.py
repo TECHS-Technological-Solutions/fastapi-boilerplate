@@ -13,7 +13,9 @@ setuptools.setup(
     license='All rights reserved',
     namespace_packages=[],
     package_dir={'': '.'},
-    packages=[],
+    packages=[
+        'app'
+    ],
     include_package_data=True,
     install_requires=[
     ],

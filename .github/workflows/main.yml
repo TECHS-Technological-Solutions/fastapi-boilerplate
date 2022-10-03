@@ -1,0 +1,97 @@
+name: techs.draft
+
+on:
+  push:
+    branches:
+      - 'develop'
+      - 'feature/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Setup pipenv
+        run: |
+          python -m pip install --upgrade pipenv
+      - name: Install pipenv packages
+        run: |
+          cd ./src
+          pipenv install --dev
+      - name: Run linter
+        run: |
+          cd ./src
+          pipenv run prospector
+      - name: Run bandit
+        run: |
+          cd ./src
+          pipenv run bandit -r . -x tests,citests
+      - name: Build docker images
+        run: |
+          cp .env.github .env
+          docker-compose build --no-cache
+      - name: Run tests
+        run: |
+          docker-compose -f docker-compose.local.yml up -d
+          docker ps -a
+
+          sleep 20
+
+          echo "----- postgres -----"
+          docker-compose -f docker-compose.local.yml logs postgres
+
+          echo "----- rabbitmq -----"
+          docker-compose -f docker-compose.local.yml logs rabbitmq
+
+          echo "----- main -----"
+          docker-compose -f docker-compose.local.yml logs techs-draft
+
+          docker-compose -f docker-compose.local.yml exec -T techs-draft pipenv install -d
+          docker-compose -f docker-compose.local.yml exec -T techs-draft pipenv run pytest -v --log-cli-level=warning
+
+          ret_val=$?
+
+          if [ $ret_val -ne 0 ];then
+            exit 1
+          fi
+
+      - name: Push docker images to repository (develop)
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+          REPO="ghcr.io/lowersilesians/techs.draft/techs.draft"
+
+          LATEST_TAG="latest"
+          LATEST_TAG="${REPO}:${LATEST_TAG}"
+
+          docker tag "$REPO" "$LATEST_TAG"
+          docker push "$LATEST_TAG"
+
+          docker image ls
+
+      - name: Push docker images to repository
+        if: github.ref == 'refs/heads/staging'
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+          cd ./src
+
+          REPO="ghcr.io/lowersilesians/techs.draft/techs.draft"
+
+          GIT_COMMIT_HASH=$(git log -1 --pretty=%h)
+          GIT_COMMIT_TAG="${REPO}:${GIT_COMMIT_HASH}"
+
+          PY_PACKAGE_VERSION=$(pipenv run python -c "import app; print(app.__version__)")
+          PY_PACKAGE_TAG="${REPO}:${PY_PACKAGE_VERSION}"
+
+          docker tag "$GIT_COMMIT_TAG" "$PY_PACKAGE_TAG"
+          docker push "$PY_PACKAGE_TAG"
+
+          docker image ls
