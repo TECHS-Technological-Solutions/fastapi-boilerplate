@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  techs-draft:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    image: ghcr.io/lowersilesians/techs.draft/techs.draft
+    env_file: .env
+    environment:
+      - PORT=8001
+    ports:
+      - 8001:8001
