@@ -56,6 +56,7 @@ This method will make the development server run on your machine, and is advanta
 $ cd ./src
 $ pip install pipenv
 $ pipenv install -d --three
+$ pipenv run pre-commit install
 
 $ pipenv run uvicorn app.main:app --reload
 ```
