@@ -75,23 +75,3 @@ jobs:
           docker push "$LATEST_TAG"
 
           docker image ls
-
-      - name: Push docker images to repository
-        if: github.ref == 'refs/heads/staging'
-        run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-          cd ./src
-
-          REPO="ghcr.io/lowersilesians/techs.draft/techs.draft"
-
-          GIT_COMMIT_HASH=$(git log -1 --pretty=%h)
-          GIT_COMMIT_TAG="${REPO}:${GIT_COMMIT_HASH}"
-
-          PY_PACKAGE_VERSION=$(pipenv run python -c "import app; print(app.__version__)")
-          PY_PACKAGE_TAG="${REPO}:${PY_PACKAGE_VERSION}"
-
-          docker tag "$GIT_COMMIT_TAG" "$PY_PACKAGE_TAG"
-          docker push "$PY_PACKAGE_TAG"
-
-          docker image ls
