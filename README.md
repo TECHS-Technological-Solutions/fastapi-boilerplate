@@ -3,6 +3,10 @@
 Boilerplate project
 
 
+## Development Setup
+
+There are two ways to run for development: with Docker or with manual/traditional setup
+
 
 ### Backend Manual Setup
 
@@ -24,4 +28,22 @@ $ pipenv run uvicorn app.main:app --reload
 
 ```bash
 $ docker-compose -f docker-compose.local.yaml up
+```
+
+### DB Migrations
+
+To create a migration.
+
+``` bash
+$ pipenv run alembic revision --autogenerate -m "your comment"
+```
+
+### DB Forward Migration
+You can upgrade one or more revision
+``` bash
+$ pipenv run alembic upgrade #num % e.g +1
+```
+or upgrade to the latest migration.
+``` bash
+$ pipenv run alembic upgrade head
 ```

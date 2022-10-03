@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 fastapi = "==0.85.0"
 uvicorn = {extras = ["standard"], version = "==0.18.3"}
+alembic = "==1.8.*"
 
 [dev-packages]
 
