@@ -7,7 +7,7 @@ name = "pypi"
 fastapi = "==0.85.0"
 uvicorn = {extras = ["standard"], version = "==0.18.3"}
 python-dotenv = "==0.19.*"
-pydantic = {extras = ["email"], version = "*"}
+pydantic = {extras = ["email"], version = "==1.10.*"}
 sqlalchemy = "==1.4"
 alembic = "==1.8.*"
 psycopg2-binary = "==2.9.*"

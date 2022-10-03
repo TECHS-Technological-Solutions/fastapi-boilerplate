@@ -39,6 +39,11 @@ All branches should follow this merging flow:
 4.1 If you do not have permissions, you will most likely have to wait for your lead to merge your branch
 
 
+#### Python Specific Notes
+
+- When adding a new package with Pipenv, please update the `Pipenv` file with the specific version of the package you installed. Please don't leave it to be `*` in the `Pipenv` file.
+
+
 ## Development Setup
 
 There are two ways to run for development: with Docker or with manual/traditional setup
