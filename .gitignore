@@ -1,0 +1,14 @@
+db.sqlite3
+__pycache__/
+
+.DS_Store
+# idea
+.idea
+.venv
+.vscode
+.pytest_cache
+.env
+.egg-info
+
+build/
+dist/
