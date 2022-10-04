@@ -43,6 +43,10 @@ $ pipenv run uvicorn app.main:app --reload
 $ docker-compose -f docker-compose.local.yaml up
 ```
 
+### Docs URL
+
+http://localhost:8000/techs-draft/docs
+
 ### DB Migrations
 
 To create a migration.
