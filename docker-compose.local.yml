@@ -12,3 +12,16 @@ services:
       - PORT=8001
     ports:
       - 8001:8001
+
+  postgres:
+    restart: always
+    image: postgres:13.0
+    env_file: .env
+    environment:
+        - POSTGRES_DBNAME=${POSTGRES_DBNAME}
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASS=${POSTGRES_PASSWORD}
+    volumes:
+        - techs-draft-postgres-data:/var/lib/postgresql/data
+    ports:
+        - 5432:5432
