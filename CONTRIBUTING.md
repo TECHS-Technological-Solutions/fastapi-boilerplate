@@ -3,17 +3,17 @@
 ### Pre-Commit
 
 Commits must be executed in the project's base directory - This is so that `pre-commit` works properly.
-No solution to run `pipenv` that is inside the `src` along with `pre-commit` has been found yet, so we will do a compromise for now.
+No solution to run `pipenv` that is inside the `src` directory along with `pre-commit` has been found yet, so we will do a compromise for now.
 
 #### Commits
 
 Commit messages must follow this specific format:
 `<descriptor>: <message>`
 
-Descriptors are: `feat`, `fix`, `chore`, etc.
+Descriptors are: `feature`, `fix`, `chore`, etc.
 
 Examples:
-- `feat: added a good feature`
+- `feature: added a good feature`
 - `fix: updated some feature`
 
 #### Branches
@@ -24,8 +24,8 @@ Branch names must follow this format:
 Descriptors are the same as in commits
 
 Examples:
-- `feat/TICKET-1/implement-this-feature`
-- `fix/TICKET-2/remove-this-bug
+- `feature/TICKET-1/implement-this-feature`
+- `fix/TICKET-2/remove-this-bug`
 
 #### Merging
 
