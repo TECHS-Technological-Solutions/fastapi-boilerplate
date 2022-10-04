@@ -9,5 +9,4 @@ repos:
     rev: 1.7.5
     hooks:
     -   id: prospector
-        args:
-        - --summary-only
+        entry: cd ./src && pipenv run prospector
