@@ -1,5 +1,10 @@
 # Contributing Guide
 
+### Pre-Commit
+
+Commits must be executed in the project's base directory - This is so that `pre-commit` works properly.
+No solution to run `pipenv` that is inside the `src` along with `pre-commit` has been found yet, so we will do a compromise for now.
+
 #### Commits
 
 Commit messages must follow this specific format:
