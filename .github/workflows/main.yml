@@ -160,7 +160,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ghcr.io/LowerSilesians/uncia.backend
+            ghcr.io/LowerSilesians/techs.draft
           tags: |
             type=schedule
             type=semver,pattern={{raw}}
