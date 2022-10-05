@@ -16,6 +16,7 @@ python-jose = {extras = ["cryptography"], version = "==3.3.*"}
 sentry-sdk = "==1.5"
 phonenumbers = "==8.12"
 httpx = "*"
+coverage = "*"
 
 [dev-packages]
 pytest = "==6.2.*"

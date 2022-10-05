@@ -25,7 +25,7 @@ There are two ways to run for development: with Docker or with manual/traditiona
 This method will make the development server run on your machine, and is advantageous when you want to do some quick changes and see the changes as you update the code.
 
 **Requirements**
-- Python == `3.8`
+- Python == `3.9`
 
 ``` bash
 # Environment setup
