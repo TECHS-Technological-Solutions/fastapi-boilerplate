@@ -4,7 +4,6 @@ import sentry_sdk
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from starlette.middleware.authentication import AuthenticationMiddleware
 from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
 from app import settings

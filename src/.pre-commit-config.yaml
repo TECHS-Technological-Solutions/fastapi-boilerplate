@@ -9,4 +9,5 @@ repos:
     rev: 1.7.5
     hooks:
     -   id: prospector
-        entry: cd ./src && pipenv run prospector
+        always_run: true
+        entry: bash -c 'cd src && PIPENV_IGNORE_VIRTUALENVS=1 pipenv run prospector'
