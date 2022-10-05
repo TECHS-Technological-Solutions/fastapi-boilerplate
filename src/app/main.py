@@ -8,8 +8,6 @@ from starlette.middleware.authentication import AuthenticationMiddleware
 from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
 from app import settings
-from app.permissions import BasicAuthBackend
-from app.middlewares import RequestContextMiddleware
 
 
 logger = logging.getLogger(__name__)
@@ -37,13 +35,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-app.add_middleware(
-    AuthenticationMiddleware,
-    backend=BasicAuthBackend()
-)
-
-app.add_middleware(RequestContextMiddleware)
 
 
 @app.get(f'/{ROOT_PATH}/ping')
