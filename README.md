@@ -37,6 +37,21 @@ $ pipenv run pre-commit install
 $ pipenv run uvicorn app.main:app --reload
 ```
 
+### Using setup.py with Pipenv
+
+```bash
+$ cd ./src
+$ pipenv install -e .
+```
+
+or
+
+```bash
+$ cd ./src
+$ pipenv shell
+$ pip install -e .
+```
+
 ### Run App in Docker Compose
 
 ```bash
